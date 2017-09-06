@@ -1,0 +1,30 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import org.testng.annotations.Test;
+
+public class connectivity {
+
+@Test
+public void DatabaseConnectivity() throws SQLException, ClassNotFoundException {
+	
+  Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+	Connection conn = DriverManager.getConnection("jdbc:sqlserver:server name;Database=database name;UserName=user;Password=password");
+	Statement st = conn.createStatement();
+	String sqlStr = "select * from tableName";
+	ResultSet rs = st.executeQuery(sqlStr);
+	while (rs.next()) {
+		System.out.println(rs.getString("columnName"));
+	  }
+  }
+}
+
+
+
+
+prerequisite:
+1- We need to add jdbc API for sql server database connectivity.
+2- sqljdbc4.jar is compatible with 1.8 and higher version of java.
+3- Add jar in reference library: Right click on project >> hover on Build Path >> Click on configure build path >> Add External jars in libraries >> click on OK
